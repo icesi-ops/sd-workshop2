@@ -1,0 +1,35 @@
+---
+- hosts: webservers
+  become: true
+  tasks:
+   - name: "Install httpd"
+     yum:
+       name: httpd
+   - name: "know hostname"
+     shell: "echo $HOSTNAME"
+     register: print_hostname
+   - name: "know ip"
+     shell: "ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/'"
+     register: print_ip
+   - name: "know mac"
+     shell: "cat /sys/class/net/$(ip route show default | awk '/default/ {print $5}')/address"
+     register: print_mac
+   - name: "know cpu"
+     shell: "grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage}'"
+     register: print_cpu
+   - name: "know memory"
+     shell: "free -m  | grep ^Mem | tr -s ' ' | cut -d ' ' -f 3"
+     register: print_memory
+   - name: "Configure httpd"
+     template:
+       src: templates/index.j2
+       dest: /var/www/html/index.html
+       owner: root
+       group: wheel
+       mode: '0644'
+   - name: "start httpd"
+     service:
+      name: httpd
+      state: restarted
+      enabled: yes
+
