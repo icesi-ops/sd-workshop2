@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>Workshop 2</title>
+    <link rel="stylesheet" href="/var/www/stylesheet/style.css">
+  </head>
+  <body style="background: #333;">
+    <div class="ram" style="width:500px; margin: 60px; color: white;">
+    <h1>Hello from {{print_hostname.stdout}}!</h1>
+    <form id="todo-form">
+      <input type="text" id="todo"/>
+      <input type="submit" value="Send"/>
+    </form>
+    <h3>TODOS for this workshop:</h3>
+    <ul>
+      <li>{{variable1}}</li>
+      <li>{{variable2}}</li>
+      <li>{{variable3}}</li>
+      <li>{{variable4}}</li>
+      <li>{{variable5}}</li>
+      <li><a href="https://vim-bootstrap.com/" >Visit this page</a></li>
+    </ul>
+    <h3>Add other todos:</h3>
+    <ul id="todo-list">
+      
+    </ul>
+      <h3>RAM Memory State</h3>
+     <li style="margin: 20px 0;">
+       Free: {{free_memory.stdout}}% <span style="height: 2px; float: right; background: #2187e7b3; width: {{free_memory.stdout}}%;"></span>
+     </li>
+     <li style="margin: 20px 0;">
+       Used: {{used_memory.stdout}}% <span style="height: 2px; float: right; background: #2187e7b3; width: {{used_memory.stdout}}%;"></span>
+     </li>
+     <li style="margin: 20px 0;">
+       Shared: {{shared_memory.stdout}}% <span style="height: 2px; float: right; background: #2187e7b3; width: {{shared_memory.stdout}}%;"></span>
+     </li>
+     <li style="margin: 20px 0;">
+       Cache: {{cache_memory.stdout}}% <span style="height: 2px; float: right; background: #2187e7b3; width: {{cache_memory.stdout}}%;"></span>
+     </li>
+     <li style="margin: 20px 0;">
+       Available: {{available_memory.stdout}}% <span style="height: 2px; float: right; background: #2187e7b3; width: {{available_memory.stdout}}%;"></span>
+     </li>
+    </div>
+  </body>
+  <script>
+    const todos = [];
+    window.onload = () => {
+      const form = document.getElementById('todo-form');
+      form.onsubmit = (e) => {
+          e.preventDefault();
+          const todo = document.getElementById('todo');
+          const todoText = todo.value;
+          todo.value = '';
+          todos.push(todoText);
+          const todoList = document.getElementById('todo-list');
+          todoList.innerHTML = '';
+          for (let i = 0; i < todos.length; i++) {
+              todoList.innerHTML += '<li>' + todos[i] + '</li>';
+          }
+      }
+    }
+  </script>
+</html>

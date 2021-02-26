@@ -1,0 +1,45 @@
+---
+- hosts: webservers
+  become: true
+  vars_files:
+    - variables.yml
+  vars:
+    variable1: "Todo-1"
+    variable2: "Todo-2"
+    variable3: "Todo-3"
+    variable4: "Todo-4"
+    variable5: "Todo-5"
+  tasks:
+    - name: "Install httpd"
+      yum:
+        name: httpd
+    - name: "know hostname"
+      shell: "echo $HOSTNAME"
+      register: print_hostname
+    - name: "Get Free RAM memory"
+      shell: free -m | grep Mem | awk '{print(($4/$2)*100)}'
+      register: free_memory
+    - name: "Get Used RAM memory"
+      shell: free -m | grep Mem | awk '{print(($3/$2)*100)}'
+      register: used_memory
+    - name: "Get Shared RAM memory"
+      shell: free -m | grep Mem | awk '{print(($5/$2)*100)}'
+      register: shared_memory
+    - name: "Get Cache Shared RAM memory"
+      shell: free -m | grep Mem | awk '{print(($6/$2)*100)}'
+      register: cache_memory
+    - name: "Get Available RAM memory"
+      shell: free -m | grep Mem | awk '{print(($7/$2)*100)}'
+      register: available_memory
+    - name: "Configure httpd"
+      template:
+        src: templates/index.j2
+        dest: /var/www/html/index.html
+        owner: root
+        group: wheel
+        mode: '0644'
+    - name: "start httpd"
+      service:
+        name: httpd
+        state: restarted
+        enabled: yes
