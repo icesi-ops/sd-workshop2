@@ -27,6 +27,24 @@
         .section h5 {
             color: {{ color1 }};
         }
+        ul {
+            list-style: none;
+        }
+        ul li::before {
+        content: "🚍";
+        display: inline-block;
+        margin-right: 0.2rem;
+        }
+
+        ul ul li::before {
+        content: "☕";
+        }
+        ul ul ul li::before {
+        content: "🍕";
+        } 
+        ul ul ul ul li::before {
+        content: "💻";
+        }   
     </style>
   </head>
   <body>
@@ -34,33 +52,75 @@
         {{ master_name }} Informa
     </div>
     <div class="section">
-        <h1>System Info</h1>
+        <h1>System Information</h1>
         <p>OS: {{ ansible_distribution }}</p>
+        <p>OS Family: {{ ansible_os_family }}</p>
+        <p>System: {{ ansible_system }}</p>
         <p>Hostname: {{ ansible_hostname }}</p>
         <p>Architecture: {{ ansible_architecture }}</p>
     </div>
     <div class="section">
-        <h1>Network information</h1>
+        <h1>Network Information</h1>
         <h5> Host Only Connection </h5>
-
+        {% set ipv4Info = ansible_eth1['ipv4'] %}
         <p>IP: {{print_ip.stdout}}</p>
         <p>Mac Address: {{ ansible_eth1['macaddress'] }}</p>
-        <p>Network: {{ ansible_eth1['ipv4']['network'] }}</p>
-        <p>Broadcast: {{ ansible_eth1['ipv4']['broadcast'] }}</p>
-        <p>Netmask: {{ ansible_eth1['ipv4']['netmask'] }}</p>
+        <p>Network: {{ ipv4Info['network'] }}</p>
+        <p>Broadcast: {{ ipv4Info['broadcast'] }}</p>
+        <p>Netmask: {{ ipv4Info['netmask'] }}</p>
 
         <h5> Nat Connection </h5>
-
-        <p>IP: {{ ansible_default_ipv4['address'] }}</p>
-        <p>Mac Address: {{ ansible_default_ipv4['macaddress'] }}</p>
-        <p>Network: {{ ansible_default_ipv4['network'] }}</p>
-        <p>Broadcast: {{ ansible_default_ipv4['broadcast'] }}</p>
-        <p>Netmask: {{ ansible_default_ipv4['netmask'] }}</p>
-        <p>Gateway: {{ ansible_default_ipv4['gateway'] }}</p>
+        {% set ipv4Info = ansible_default_ipv4 %}
+        <p>IP: {{ ipv4Info['address'] }}</p>
+        <p>Mac Address: {{ ipv4Info['macaddress'] }}</p>
+        <p>Network: {{ ipv4Info['network'] }}</p>
+        <p>Broadcast: {{ ipv4Info['broadcast'] }}</p>
+        <p>Netmask: {{ ipv4Info['netmask'] }}</p>
+        <p>Gateway: {{ ipv4Info['gateway'] }}</p>
         
-        {% for loopvar in hostvars[print_hostname.stdout] %}
-        {{ loopvar }}
-        {% endfor %}
+    </div>
+    <div class="section">
+        <h1>Other Ansible Information</h1>
+        <ul>
+            {% for loopvar in hostvars[print_hostname.stdout] %}
+            <li>
+                {{ loopvar }}
+                {% if hostvars[print_hostname.stdout][loopvar] is mapping %}
+                <ul>
+                    {% for lv2 in hostvars[print_hostname.stdout][loopvar]%}
+                        <li>
+                            {{ lv2 }}
+                            {% if hostvars[print_hostname.stdout][loopvar][lv2] is mapping %}
+                            <ul>
+                                {% for lv3 in hostvars[print_hostname.stdout][loopvar][lv2]%}
+                                    <li>
+                                        {{ lv3 }}
+                                        {% if hostvars[print_hostname.stdout][loopvar][lv2][lv3] is mapping %}
+                                        <ul>
+                                            {% for lv4 in hostvars[print_hostname.stdout][loopvar][lv2][lv3]%}
+                                                <li>
+                                                    {{ lv4 }}: {{hostvars[print_hostname.stdout][loopvar][lv2][lv3][lv4]}}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                        {% else %}
+                                        <ul><li>{{hostvars[print_hostname.stdout][loopvar][lv2][lv3]}}</li></ul>
+                                        {% endif %} 
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <ul><li>{{hostvars[print_hostname.stdout][loopvar][lv2]}}</li></ul>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <ul><li>{{hostvars[print_hostname.stdout][loopvar]}}</li></ul>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
     </div>
   </body>
 </html>
