@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{print_hostname.stdout}}</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .header{
+            background-color:{{ color3 }};
+            padding-left: 1em;
+            padding: 1em 0 1em 1em;
+            box-shadow: 2px 5px 8px 2px {{ color1 }};
+            font-size:20px;
+            font-weight: bold;
+        }
+        .section {
+            margin-left: 1em;
+            margin-right: 1em;
+        }
+        .section h1 {
+            color: {{ color1 }};
+            border-bottom: 1px solid {{ color2 }};
+        }
+        .section h5 {
+            color: {{ color1 }};
+        }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+        {{ master_name }} Informa
+    </div>
+    <div class="section">
+        <h1>System Info</h1>
+        <p>OS: {{ ansible_distribution }}</p>
+        <p>Hostname: {{ ansible_hostname }}</p>
+        <p>Architecture: {{ ansible_architecture }}</p>
+    </div>
+    <div class="section">
+        <h1>Network information</h1>
+        <h5> Host Only Connection </h5>
+
+        <p>IP: {{print_ip.stdout}}</p>
+        <p>Mac Address: {{ ansible_eth1['macaddress'] }}</p>
+        <p>Network: {{ ansible_eth1['ipv4']['network'] }}</p>
+        <p>Broadcast: {{ ansible_eth1['ipv4']['broadcast'] }}</p>
+        <p>Netmask: {{ ansible_eth1['ipv4']['netmask'] }}</p>
+
+        <h5> Nat Connection </h5>
+
+        <p>IP: {{ ansible_default_ipv4['address'] }}</p>
+        <p>Mac Address: {{ ansible_default_ipv4['macaddress'] }}</p>
+        <p>Network: {{ ansible_default_ipv4['network'] }}</p>
+        <p>Broadcast: {{ ansible_default_ipv4['broadcast'] }}</p>
+        <p>Netmask: {{ ansible_default_ipv4['netmask'] }}</p>
+        <p>Gateway: {{ ansible_default_ipv4['gateway'] }}</p>
+        
+        {% for loopvar in hostvars[print_hostname.stdout] %}
+        {{ loopvar }}
+        {% endfor %}
+    </div>
+  </body>
+</html>
