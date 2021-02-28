@@ -31,20 +31,38 @@
             list-style: none;
         }
         ul li::before {
-        content: "🚍";
-        display: inline-block;
-        margin-right: 0.2rem;
+            content: "🚍";
+            display: inline-block;
+            margin-right: 0.2rem;
+        }
+
+        ul li {
+            color: {{ color3 }};
         }
 
         ul ul li::before {
-        content: "☕";
+            content: "☕";
         }
+
+        ul ul li {
+            color: {{ color2 }};
+        }
+
         ul ul ul li::before {
-        content: "🍕";
+            content: "🍕";
         } 
+
+        ul ul ul li {
+            color: {{ color1 }};
+        }
+
         ul ul ul ul li::before {
-        content: "💻";
+            content: "💻";
         }   
+
+        ul ul ul ul li {
+            color: black;
+        }
     </style>
   </head>
   <body>
