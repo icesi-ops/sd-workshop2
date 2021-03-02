@@ -14,7 +14,7 @@
             shell: "free -m | awk '{print $4}' | sed -n 2p"
             register: free_ram
           - name: "Date"
-            shell: "date '+%s'"
+            shell: "date"
             register: print_date
           - name: "Configure httpd"
             template:
