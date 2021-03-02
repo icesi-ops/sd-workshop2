@@ -1,0 +1,41 @@
+---
+- hosts: servers
+  become: true
+  vars_files:
+          - vars/main.yml
+  tasks:
+          - name: "Install httpd"
+            yum:
+                    name: httpd
+          - name: "Know Hostname"
+            shell: "echo $HOSTNAME"
+            register: print_hostname
+          - name: "Free RAM"
+            shell: "free -m | awk '{print $4}' | sed -n 2p"
+            register: free_ram
+          - name: "Date"
+            shell: "date '+%s'"
+            register: print_date
+          - name: "Configure httpd"
+            template:
+                    src: templates/index.j2
+                    dest: "{{ path_page }}/index.html"
+                    owner: root
+                    group: wheel
+                    mode: '0644'
+          - name: "Copying resources (Styles css)"
+            copy:
+                    src: templates/css
+                    dest: "{{ path_page }}"
+                    mode: '0644'
+          - name: "Copying resources (images)"
+            copy:
+                    src: templates/images
+                    dest: "{{ path_page }}"
+                    mode: '0644'
+          - name: "Start httpd"
+            service:
+                    name: httpd
+                    state: restarted
+                    enabled: yes
+

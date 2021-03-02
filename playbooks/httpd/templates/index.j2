@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>JuanchoVelezPro from {{print_hostname.stdout}}</title>
+<link rel="icon" type="image/png" href="http://{{ansible_eth1.ipv4.address}}/images/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&family=Rubik&display=swap" rel="stylesheet">
+<!-- <link rel="stylesheet" href="css/media.css" media="screen and (max-width:768px"> -->
+<link rel="stylesheet" href="http://{{ansible_eth1.ipv4.address}}/css/styles.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <header class="header">
+
+        <div class="container">
+        <figure class="logo">
+
+            <img src="http://{{ansible_eth1.ipv4.address}}/images/JuanchoVelezPro.png" alt="Imagen de portada" height="90">
+
+        </figure>
+        <nav class="menu">
+            <ol>
+                <li>
+                    <a class="link" href="#proyectos">Portafolio</a>
+                </li>
+                <li>
+                    <a class="link" href="#habilidades">Habilidades</a>
+                </li>
+                <li>
+                    <a class="link" href="#contacto">Contacto</a>
+                </li>
+                
+            </ol> 
+        </nav>
+    </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            
+        <h1>
+            Hola, soy <strong>Juan Camilo Vélez Olaya</strong>  <br>   Estudiante Pregrado de <strong>Ingeniería Telemática</strong> <br/> <strong>Universidad ICESI</strong> 
+        </h1>
+
+      <img  class="hero-image" src="http://{{ansible_eth1.ipv4.address}}/images/foto2.jpg" width="300" height="250" alt="Foto Juan Camilo Vélez Olaya">
+    </div>
+    </section>
+
+    <section id= "info_machine" class="projects">
+
+    <div class="container">
+    <h2>Info Machine -> from ( {{ ansible_hostname }})</h2>
+    <article class="project">
+
+	<div>
+	<p> Facts </p>
+	</div>
+    <div class= "project-details">
+
+	<h6 class="project-subtitle">Machine Hostname: {{ansible_hostname}}</h3>
+	<h6 class="project-subtitle">Machine IP Address: {{ansible_eth1.ipv4.address}}</h3>
+	<h6 class="project-subtitle">Machine MAC Address: {{ansible_eth1.macaddress}}</h3>
+	<h6 class="project-subtitle">Machine Architecture: {{ansible_architecture}}</h3>
+	<h6 class="project-subtitle">Machine Distribution: {{ansible_distribution}}</h3>
+	<h6 class="project-subtitle">Machine Dist. Version: {{ansible_distribution_version}}</h3>
+	
+	
+    </div>
+    
+
+    </article>
+    
+     <article class="project">
+
+	<div>
+	<p> ExtraVars </p>
+	</div>
+    <div class= "project-details">
+
+	<h6 class="project-subtitle">Server Name: {{serverName}}</h3>
+	<h6 class="project-subtitle">Server Admin: {{serverAdmin}}</h3>
+	<h6 class="project-subtitle">Admin Email: {{adminEmail}}</h3>
+	<h6 class="project-subtitle">Admin Number: {{adminNumber}}</h3>
+	<h6 class="project-subtitle">Admin Hobby: {{adminHobby}}</h3>
+	
+	
+    </div>
+    
+
+    </article>
+    
+         <article class="project">
+
+	<div>
+	<p> Registered </p>
+	</div>
+    <div class= "project-details">
+
+	<h6 class="project-subtitle">Machine Hostname: {{print_hostname.stdout}}</h3>
+	<h6 class="project-subtitle">Machine Free RAM: {{free_ram.stdout}} MB</h3>
+	<h6 class="project-subtitle">Machine Date Created: {{print_date.stdout}} </h3>
+
+	
+	
+    </div>
+    
+
+    </article>
+    
+    </div>
+      </section>
+
+
+    <section  id="proyectos" class="projects">
+        <div class="container">
+        <h2>Proyectos</h2>
+        <article class="project">
+            <div class="project-details">
+                <h3 class="project-title">Iterepi</h3>
+    
+                <h6 class="project-subtitle">Aplicación Móvil en Android</h6>
+                <p class="project-date"><small> <strong>Fecha:</strong> 21/05/2020</small></p>
+                <p class="project-url"><small> <strong>Enlace:</strong> <a href="https://github.com/juanchovelezpro/Iterepi" target="_blank"> Repositorio del Proyecto </a></small></p>
+                <p class="project-description"> Iterepi ("Items Ready To Pick") es una aplicación móvil donde los vendedores (tiendas, supermercados, etc) ofrecen sus productos a los compradores.
+                    Cuando los compradores realizan una compra, pueden agendar cuándo van a recoger su pedido, para que este se encuentre listo cuando se vaya a recoger.  </p>
+              
+            </div>
+                    <figure class="project-imageContainer">
+                        
+                        <img class="project-image" width="250" src="http://{{ansible_eth1.ipv4.address}}/images/iterepi.jpeg" alt="Iterepi Image">
+                        
+                    </figure>
+        </article>
+
+        <article class="project">
+            <div class="project-details">
+                <h3 class="project-title">PlaylistFinder</h3>
+    
+                <h6 class="project-subtitle">Aplicación Móvil en Android</h6>
+                <p class="project-date"><small> <strong>Fecha:</strong> 17/04/2020</small></p>
+                <p class="project-url"><small> <strong>Enlace:</strong> <a href="https://github.com/juanchovelezpro/android-deezer" target="_blank"> Repositorio del Proyecto </a></small></p>
+                <p class="project-description"> PlaylistFinder es una aplicación móvil en la que se pueden encontrar playlists en la base de datos de Deezer relacionadas al contenido que se busque. Todo esto con la API de Deezer. </p>
+              
+            </div>
+                    <figure class="project-imageContainer">
+                        
+                        <img class="project-image" width="250" src="http://{{ansible_eth1.ipv4.address}}/images/apideezer.jpeg" alt="PlaylistFinder Image">
+                        
+                    </figure>
+        </article>
+
+        <article class="project">
+            <div class="project-details">
+                <h3 class="project-title">MySites</h3>
+    
+                <h6 class="project-subtitle">Aplicación Móvil en Android</h6>
+                <p class="project-date"><small> <strong>Fecha:</strong> 20/03/2020</small></p>
+                <p class="project-url"><small> <strong>Enlace:</strong> <a href="https://github.com/juanchovelezpro/android-googlemaps" target="_blank"> Repositorio del Proyecto </a></small></p>
+                <p class="project-description"> MySites es una aplicación móvil en la que se pueden colocar marcadores, ver tu ubicación actual, la dirección en la que te encuentras y la distancia entre tu ubicación actual y los marcadores.
+                    También indica cuál es el marcador mas cercano y si te encuentras lo suficientemente cerca, indica que te encuentras en dicho lugar. Todo esto con la API de Google Maps. </p>
+              
+            </div>
+                    <figure class="project-imageContainer">
+                        
+                        <img class="project-image" width="250" src="http://{{ansible_eth1.ipv4.address}}/images/apigmaps.jpeg" alt="App API Google Maps Image">
+                        
+                    </figure>
+        </article>
+
+        <article class="project">
+            <div class="project-details">
+                <h3 class="project-title">Galaxy Game</h3>
+    
+                <h6 class="project-subtitle">Juego 2D en Java</h6>
+                <p class="project-date"><small> <strong>Fecha:</strong> 10/12/2019</small></p>
+                <p class="project-url"><small> <strong>Enlace:</strong> <a href="https://github.com/juanchovelezpro/GalaxyGame" target="_blank"> Repositorio del Proyecto </a></small></p>
+                <p class="project-description">Galaxy Game es un juego 2D hecho en Java. Consiste en manejar una nave espacial y disparar proyectiles láser para eliminar a las naves enemigas. </p>
+              
+            </div>
+                    <figure class="project-imageContainer">
+                        
+                        <img class="project-image" width="250" src="http://{{ansible_eth1.ipv4.address}}/images/galaxygame.png" alt="Galaxy Game Image">
+                        
+                    </figure>
+        </article>
+
+        <article class="project">
+            <div class="project-details">
+                <h3 class="project-title">Inventory Management</h3>
+    
+                <h6 class="project-subtitle">Java Program</h6>
+                <p class="project-date"><small> <strong>Fecha:</strong> 29/11/2019</small></p>
+                <p class="project-url"><small> <strong>Enlace:</strong> <a href="https://github.com/juanchovelezpro/ManejoDeInventarios" target="_blank"> Repositorio del Proyecto </a></small></p>
+                <p class="project-description">Inventory Management es un programa que permite visualizar el inventario que se encuentra en un archivo Excel. Muestra graficas e información relevante del inventario. </p>
+              
+            </div>
+                    <figure class="project-imageContainer">
+                        
+                        <img class="project-image" width="250" src="http://{{ansible_eth1.ipv4.address}}/images/inventorymanage.png" alt="Inventory Management Image">
+                        
+                    </figure>
+        </article>
+
+        <article class="project">
+            <div class="project-details">
+                <h3 class="project-title">Smart Parking</h3>
+    
+                <h6 class="project-subtitle">Arduino Project</h6>
+                <p class="project-date"><small> <strong>Fecha:</strong> 29/11/2018</small></p>
+                <p class="project-url"><small> <strong>Enlace:</strong> <a href="https://github.com/juanchovelezpro/SmartParking" target="_blank"> Repositorio del Proyecto </a></small></p>
+                <p class="project-description">Smart Parking es un parqueadero inteligente realizado en una placa de desarrollo Arduino que con sensores detecta e indica en una pantalla la cantidad de puestos disponibles en el parqueadero al público. </p>
+              
+            </div>
+                    <figure class="project-imageContainer">
+                        
+                        <img class="project-image" width="250" src="http://{{ansible_eth1.ipv4.address}}/images/parking.jpeg" alt="Smart Parking Image">
+                        
+                    </figure>
+        </article>
+
+        <article class="project">
+            <div class="project-details">
+                <h3 class="project-title">Travel Colombia</h3>
+    
+                <h6 class="project-subtitle">Java Program</h6>
+                <p class="project-date"><small> <strong>Fecha:</strong> 26/11/2018</small></p>
+                <p class="project-url"><small> <strong>Enlace:</strong> <a href="https://github.com/juanchovelezpro/DataStructures-Project" target="_blank"> Repositorio del Proyecto </a></small></p>
+                <p class="project-description"> Travel Colombia es un programa que permite ver la ruta mas corta (rutas principales) entre ciudades en Colombia. </p>
+              
+            </div>
+                    <figure class="project-imageContainer">
+                        
+                        <img class="project-image" width="250" src="http://{{ansible_eth1.ipv4.address}}/images/travel.png" alt="Travel Colombia Image">
+                        
+                    </figure>
+        </article>
+
+        <article class="project">
+            <div class="project-details">
+                <h3 class="project-title">Elevator</h3>
+    
+                <h6 class="project-subtitle">Arduino Project</h6>
+                <p class="project-date"><small> <strong>Fecha:</strong> 09/06/2017</small></p>
+                <p class="project-url"><small> <strong>Enlace:</strong> <a href="https://github.com/juanchovelezpro/Elevator" target="_blank"> Repositorio del Proyecto </a></small></p>
+                <p class="project-description">Elevator es un ascensor de dos pisos realizado en una placa de desarrollo Arduino.</p>
+              
+            </div>
+                    <figure class="project-imageContainer">
+                        
+                        <img class="project-image" width="250" src="http://{{ansible_eth1.ipv4.address}}/images/ascensor.jpg" alt="Elevator Image">
+                        
+                    </figure>
+        </article>
+
+        <article class="project">
+            <div class="project-details">
+                <h3 class="project-title">Assistance Control</h3>
+    
+                <h6 class="project-subtitle">Arduino Project</h6>
+                <p class="project-date"><small> <strong>Fecha:</strong> 03/06/2016</small></p>
+                <p class="project-url"><small> <strong>Enlace:</strong> <a href="https://github.com/juanchovelezpro/AssistanceControl" target="_blank"> Repositorio del Proyecto </a></small></p>
+                <p class="project-description">Assistance Control es un control de asistencia realizado en una placa de desarrollo Arduino para tomar el ingreso y salida de los miembros de un colegio.</p>
+              
+            </div>
+                    <figure class="project-imageContainer">
+                        
+                        <img class="project-image" width="250" src="http://{{ansible_eth1.ipv4.address}}/images/assistancecontrol.jpg" alt="AssistanceControl Image">
+                        
+                    </figure>
+        </article>
+        
+    </div>
+    </section>
+
+    <div class="container">
+    <h2 id="habilidades" class="skills-super-title"> Habilidades </h2>
+</div>
+
+    
+        
+    <section  class="skills-list">
+
+        <div class="container">
+        <article class="skills">
+
+            <figure class="skills-imageContainer">
+
+                <img class="skills-image" src="http://{{ansible_eth1.ipv4.address}}/images/git.svg" width="150"/>
+
+            </figure>
+       <div class="skill-detail">
+
+                    <h3 class="skills-title">Git</h3>
+                    <p class="skills-description">Control de versiones con Git</p>
+                    <a></a>
+        
+       </div>
+        </article>
+
+        <article class="skills">
+
+            <figure class="skills-imageContainer">
+
+                <img class="skills-image" src="http://{{ansible_eth1.ipv4.address}}/images/java.svg" width="150"/>
+
+            </figure>
+        <div class="skill-detail">
+            
+                    <h3 class="skills-title">Java</h3>
+                    <p class="skills-description">Desarrollo Backend en Java</p>
+                    <a></a>
+       
+                </div>
+        </article>
+
+        <article class="skills">
+
+            <figure class="skills-imageContainer">
+
+                <img class="skills-image" src="http://{{ansible_eth1.ipv4.address}}/images/android.svg" width="150"/>
+
+            </figure>
+        <div class="skill-detail">
+            
+                    <h3 class="skills-title">Android</h3>
+                    <p class="skills-description">Aplicaciones móviles en Android</p>
+                    <a></a>
+       
+                </div>
+        </article>
+
+        <article class="skills">
+
+            <figure class="skills-imageContainer">
+
+                <img class="skills-image" src="http://{{ansible_eth1.ipv4.address}}/images/arduino.svg" width="150"/>
+
+            </figure>
+        <div class="skill-detail">
+            
+                    <h3 class="skills-title">Arduino</h3>
+                    <p class="skills-description">Desarrollo de proyectos con sensores</p>
+                    <a></a>
+       
+                </div>
+        </article>
+
+        <article class="skills">
+
+            <figure class="skills-imageContainer">
+
+                <img class="skills-image" src="http://{{ansible_eth1.ipv4.address}}/images/database.svg" width="150"/>
+
+            </figure>
+        <div class="skill-detail">
+                    <h3 class="skills-title">Bases de Datos</h3>
+                    <p class="skills-description">MySQL y MongoDB</p>
+                    <a></a>
+        </div>
+  
+    </div>
+  
+    </section>
+    <section id="contacto" class="contact">
+
+       <div class="container">
+
+           <h3>¡Encuéntrame en redes sociales!</h3>
+    
+
+       <div class="social">
+
+           <a href="https://facebook.com/JuanchoVelezOlaya" class="social-link facebook" target="_blank"></a>
+           <a href="https://twitter.com/juanchovelez98" class="social-link twitter" target="_blank"></a>
+           <a href="https://instagram.com/juanchovelezpro" class="social-link instagram" target="_blank"></a>
+           <a href="https://github.com/juanchovelezpro" class="social-link github" target="_blank"></a>
+
+       </div>
+
+           
+       </div>
+
+    </section>
+    <footer class="footer">
+        <div class="container">
+            
+            <div>
+                <p>Portafolio Curso Desarrollo Web Platzi</p>
+            </div>
+
+            <div>
+                <p>Customized by JuanchoVelezPro</p>
+            </div>
+            
+        </div>
+
+
+    </footer>
+
+</body>
+
+</html>
