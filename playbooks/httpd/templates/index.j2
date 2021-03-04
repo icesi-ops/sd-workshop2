@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Universidad Icesi - Sebastian Rebolledo</title>
+  </head>
+  <body>
+	  <h1> Sebastian Rebolledo- {{ansible_hostname}}</h1>
+<table class="default">
+
+  <tr>
+
+    <th>Nombre del servidor</th>
+
+    <th>Direccion IP</th>
+
+    <th>Puerto</th>
+
+    <th>Grupo al que perteneces</th>
+  </tr>
+
+  <tr>
+
+	  <td>{{ansible_hostname}}</td>
+
+	  <td>{{ansible_host}}</td>
+
+	  <td>{{ansible_port}}</td>
+
+	  <td>{{group_names}}</td>
+
+  </tr>
+
+</table>
+  </body>
+</html>
