@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/home/sebastian/Escritorio/distribuidos/workshops/wotkshop2/sd-workshop2","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
