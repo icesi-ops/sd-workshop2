@@ -1,0 +1,30 @@
+---
+- hosts: webservers
+  vars:
+    time: "{{ lookup('pipe', 'date -d \"1 day ago\" +\"%Y%m%d\"') }}"
+  become: true
+  tasks:
+   - name: "Install httpd"
+     yum:
+       name: httpd
+   - name: "know hostname"
+     shell: "echo $HOSTNAME"
+     register: print_hostname
+   - name: "know hour"
+     shell: echo "{{ ansible_facts["eth1"]["ipv4"]["address"] }}"
+     register: print_ip
+   - name: get the username running the deploy
+     become: false
+     local_action: command whoami
+     register: username_on_the_host
+   - name: "Configure httpd"
+     template:
+       src: templates/index.j2
+       dest: /var/www/html/index.html
+       owner: root
+       group: wheel
+       mode: '0644'
+   - name: "start httpd"
+     service:
+      name: httpd
+      state: restarted

@@ -1,0 +1,36 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Loadbalancer control</title>
+  </head>
+  <body>
+    <h1>Hello from {{print_hostname.stdout}}!</h1>
+    <p>&nbsp;</p>
+    <h1 style="text-align: center; color: #000;">BIENVENIDO AL PANEL DE CONTROL DEL LOAD BALANCER</h1>
+    <h1 style="text-align: center; color: #000;">Te atendió el server: {{print_hostname.stdout}}</h1>
+    <p style="text-align:center;">Esta demo permite ver el estado del servidor actual que usa el LB y algunos datos</p>
+    <p></p>
+    <div style="text-align:center">
+    <table border="1" style="border: 2px solid #000; border-collapse: collapse">
+      <tr>
+        <th>Host</th>
+        <th>Hostname</th>
+        <th>IP v4</th>
+        <th>User</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>{{print_hostname.stdout}}</td>
+        <td>{{print_ip.stdout}}</td>
+        <td>{{username_on_the_host.stdout}}</td>
+      </tr>
+    </table>
+    </div>
+    <p> {{print_ip.stdout}} </p>
+
+  </body>
+  
+</html>
