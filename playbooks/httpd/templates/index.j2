@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>
+    body {background-color: powderblue;}
+    h1   {color: blue; background-color:DodgerBlue;}
+    h2   {font: verdana;}
+</style>
+    <meta charset="utf-8">
+    <title>Identifying to Server's Pao</title>
+  </head>
+  <body>
+    <h1><center>Hello, I'm server {{print_hostname.stdout}}!</center></h1>
+    <div>
+    <h2> My maker is Paola Veloza and this is a information about me: </h2>
+
+    {% set ipv4Info = ansible_eth1['ipv4'] %}
+    <p> My name is {{print_hostname.stdout}}</p>
+    <h3> About my memory free </h3>
+    <p> {{print_memory.stdout}}
+    </div>
+
+
+  </body>
+</html>
