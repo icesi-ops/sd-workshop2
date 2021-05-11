@@ -8,6 +8,9 @@
    - name: "know hostname"
      shell: "echo $HOSTNAME"
      register: print_hostname
+   - name:  "print about memory"
+     shell: "free -mt"
+     register: print_memory
    - name: "Configure httpd"
      template:
        src: templates/index.j2
@@ -20,3 +23,4 @@
       name: httpd
       state: restarted
       enabled: yes
+   
