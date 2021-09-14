@@ -10,3 +10,6 @@ Bonus:
 - EL nginx debe imprimir si responde el servidor web 1 o el 2
 
 DUe date: 19-septiembre-2021
+
+DEspués de la fecha se pierde el bonus
+DEspues de la fecha la nota del workshop vale 0.1 menos por cada día pasado
