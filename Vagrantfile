@@ -9,6 +9,26 @@ Vagrant.configure("2") do |config|
 
   config.ssh.insert_key = false
 
+# This is the provisioning for the Loadbalancer
+  config.vm.define "lb" do |lb|
+    lb.vm.box = "centos/7"
+    lb.vm.hostname = "lb"
+    lb.vm.network "private_network", ip: "192.168.33.200"
+    lb.vm.provider "virtualbox" do |vb|
+     vb.customize ["modifyvm", :id, "--memory", "512", "--cpus", "1", "--name", "lb"]
+    end
+    lb.vm.provision "ansible" do |ansible|
+      ansible.playbook = "playbooks/haproxy/loadbalancer.yml"
+      ansible.extra_vars = {
+         "web_servers" => [
+          {"name": "web-1","ip":"192.168.33.11"},
+          {"name": "web-2","ip":"192.168.33.12"}
+         ] 
+      }
+    
+    end  
+  end
+
 # This is the provisioning for the two Virtual Machines
   (1..2).each do |i|
    config.vm.define "web-#{i}" do |web|
