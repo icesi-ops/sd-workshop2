@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<title>Ansible Workshop #2</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<h1>In the following page you can see 5 ansible facts</h1>
+		<h2>Ansible Fact #1 "ansible_distribution"</h2>
+		<p1>{{ansible_distribution}}</p1>
+        <h2>Ansible Fact #2  "ansible_interfaces" </h2>
+		<p1>{{ansible_interfaces}}</p1>
+		<h2>Ansible Fact #3 "ansible_hostname" </h2>
+		<p1>{{print_hostname.stdout}}!</p1>
+ 		<h2>Ansible Fact #4 "ansible_all_ipv4_addresses"</h2>
+		<p1>{{ansible_all_ipv4_addresses}}</p1>
+		<h2>Ansible Fact #5 "ansible_processor" </h2>
+		<p1>{{ansible_processor}}</p1>
+	</body>
+</html>	
