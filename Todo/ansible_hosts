@@ -1,0 +1,6 @@
+[servers]
+web-1 ansible_ssh_host=192.168.33.21
+web-2 ansible_ssh_host=192.168.33.22
+
+[dbservers]
+db ansible_ssh_host=192.168.33.100

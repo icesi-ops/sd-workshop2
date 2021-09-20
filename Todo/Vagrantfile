@@ -1,0 +1,50 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.ssh.insert_key = false
+  
+  config.vm.define "nginx" do |nginx|
+  	nginx.vm.box = "centos/7"
+  	nginx.vm.hostname = "sistemasdistribuidos"
+  	nginx.vm.network "private_network", ip: "192.168.33.200"
+  	nginx.vm.provider "virtualbox" do |vb|
+  	 vb.customize ["modifyvm", :id, "--memory", "512", "--cpus", "1", "--name", "lb"]
+  	end
+  	nginx.vm.provision "ansible" do |ansible|
+  	  ansible.playbook = "playbooks/nginx/main.yml"
+  	  ansible.extra_vars = {
+  	     "web-servers" => [
+  	     {"name": "web-1", "ip":"192.168.33.21"},
+  	     {"name": "web-2", "ip":"192.168.33.22"}
+  	    ]
+  	  } 
+  	end
+  end
+  
+  (1..2).each do |i|
+   config.vm.define "web-#{i}" do |web|
+     web.vm.box = "centos/7"
+     web.vm.hostname = "web-#{i}"
+     web.vm.network "private_network", ip: "192.168.33.2#{i}"
+     web.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "512", "--cpus", "1", "--name", "web-#{i}"]
+     end
+     web.vm.provision "ansible" do |ansible|
+      ansible.playbook = "playbooks/httpd/webserver.yml"
+      ansible.groups = {
+        "webservers" => ["web-#{i}"]
+       }
+     end
+   end
+  end
+
+  config.vm.define "db" do |db|
+   db.vm.box = "centos/7"
+   db.vm.hostname = "db"
+   db.vm.network "private_network", ip: "192.168.33.100"
+   db.vm.provision "shell", inline: "echo Hallo, Ima DB server"
+  end
+end
+

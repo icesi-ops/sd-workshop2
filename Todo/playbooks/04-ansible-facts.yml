@@ -1,0 +1,13 @@
+---
+- hosts: servers
+  tasks:
+    - debug: msg="{{ansible_bios_date}}"
+    - debug: msg="{{ansible_date_time}}"
+    - debug: var=ansible_distribution
+    - debug: var=ansible_distribution_file_path
+    - debug: var=ansible_distribution_release
+    - debug: var=ansible_distribution_version
+    - debug: var=ansible_env
+    - debug: var=ansible_processor_cores
+    - debug: var=ansible_python
+    - debug: var=ansible_virtualization_role
