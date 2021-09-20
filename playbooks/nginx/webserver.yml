@@ -2,29 +2,6 @@
 - hosts: webservers
   become: true
   tasks:
-    - name: "Install epel repository"
-      yum:
-        name: epel-release
-    - name: "Install nginx"
-      yum:
-        name: nginx
-        state: present
-    - name: "Start nginx"
-      service:
-        name: nginx
-        state: started
-        enabled: yes
-    - name: "Declare hostname"
-      shell: "echo $HOSTNAME"
-      register: print_hostname
-    - name: "Configure nginx"
-      template:
-        src: templates/index.j2
-        dest: /usr/share/nginx/html/index.html
-        owner: root
-        group: wheel
-        mode: "0644"
-
     - name: "Task 1"
       shell: date
       register: the_date
@@ -49,3 +26,26 @@
       shell: free -m
       register: free_response
     - debug: msg="{{ free_response.stdout }}"
+
+    - name: "Install epel repository"
+      yum:
+        name: epel-release
+    - name: "Install nginx"
+      yum:
+        name: nginx
+        state: present
+    - name: "Start nginx"
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+    - name: "Declare hostname"
+      shell: "echo $HOSTNAME"
+      register: print_hostname
+    - name: "Configure nginx"
+      template:
+        src: templates/index.j2
+        dest: /usr/share/nginx/html/index.html
+        owner: root
+        group: wheel
+        mode: "0644"
