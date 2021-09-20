@@ -1,0 +1,53 @@
+---
+- hosts: webservers
+  become: true
+  tasks:
+    - name: "Install epel repository"
+      yum:
+        name: epel-release
+    - name: "Install nginx"
+      yum:
+        name: nginx
+        state: present
+    - name: "Start nginx"
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+    - name: "Configure nginx"
+      template:
+        src: templates/index.j2
+        dest: /usr/share/nginx/html/index.html
+        owner: root
+        group: wheel
+        mode: "0644"
+
+    - name: "Task 1"
+      shell: "echo $HOSTNAME"
+      register: print_hostname
+    - debug: msg="{{ print_hostname.stdout }}"
+
+    - name: "Task 2"
+      shell: date
+      register: print_date 
+    - debug: msg="{{ print_date.stdout }}"
+
+    - name: "Task 2"
+      shell: whoami
+      register: user_name
+    - debug: msg="{{ user_name.stdout }}"
+
+    - name: "Task 3"
+      shell: uname -a
+      register: response_uname
+    - debug: msg="{{ response_uname.stdout }}"
+
+    - name: "Task 4 - Get free ram percentage"
+      shell: free | grep Mem | awk '{print $4/$2 * 100.0}'
+      register: free_response
+    - debug: msg="{{ free_response.stdout }}"
+
+    - name: "Task 5"
+      shell: lscpu | egrep 'Model name|Socket|Thread|NUMA|CPU\(s\)'
+      register: cpuinfo_response
+    - debug: msg="{{ cpuinfo_response.stdout }}"
