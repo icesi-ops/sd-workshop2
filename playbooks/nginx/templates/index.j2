@@ -2,9 +2,19 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>My template</title>
+    <title>Distributed Systems WS #2</title>
   </head>
   <body>
-    <h1>Hello from </h1>
+    <h1>Ansible facts</h1>
+    <h2>#1 - host <h2>
+            <p1> {{print_hostname.stdout}} </p1>
+    <h2>#2 - date <h2>
+            <p1> {{print_date.stdout}} </p1>
+    <h2>#3 - whoami <h2>
+            <p1> {{response_whoami.stdout}} </p1>
+    <h2>#4 - free ram <h2>
+            <p1> {{response_free.stdout}} </p1>
+    <h2>#5 - cpu info <h2>
+            <p1> {{response_cpuinfo.stdout}} </p1>
   </body>
 </html>

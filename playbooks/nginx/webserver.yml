@@ -14,14 +14,6 @@
         name: nginx
         state: started
         enabled: yes
-    - name: "Configure nginx"
-      template:
-        src: templates/index.j2
-        dest: /usr/share/nginx/html/index.html
-        owner: root
-        group: wheel
-        mode: "0644"
-
     - name: "Task 1"
       shell: "echo $HOSTNAME"
       register: print_hostname
@@ -34,8 +26,8 @@
 
     - name: "Task 2"
       shell: whoami
-      register: user_name
-    - debug: msg="{{ user_name.stdout }}"
+      register: response_whoami
+    - debug: msg="{{ response_whoami.stdout }}"
 
     - name: "Task 3"
       shell: uname -a
@@ -44,10 +36,18 @@
 
     - name: "Task 4 - Get free ram percentage"
       shell: free | grep Mem | awk '{print $4/$2 * 100.0}'
-      register: free_response
-    - debug: msg="{{ free_response.stdout }}"
+      register: response_free
+    - debug: msg="{{ response_free.stdout }}"
 
     - name: "Task 5"
       shell: lscpu | egrep 'Model name|Socket|Thread|NUMA|CPU\(s\)'
-      register: cpuinfo_response
-    - debug: msg="{{ cpuinfo_response.stdout }}"
+      register: response_cpuinfo
+    - debug: msg="{{ response_cpuinfo.stdout }}"
+
+    - name: "Configure nginx"
+      template:
+        src: templates/index.j2
+        dest: /usr/share/nginx/html/index.html
+        owner: root
+        group: wheel
+        mode: "0644"
