@@ -1,0 +1,10 @@
+[servers]
+machineweb-1 ansible_ssh_host=192.168.33.1
+machineweb-2 ansible_ssh_host=192.168.33.2
+
+[databases]
+db ansible_ssh_host=192.168.33.100
+
+[first:children]
+servers
+databases

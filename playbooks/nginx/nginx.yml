@@ -1,0 +1,57 @@
+---
+- hosts: servers
+  become: true
+  tasks:
+    - name: "Install epel repository"
+      yum:
+        name: epel-release
+    - name: "Install nginx"
+      yum:
+        name: nginx
+        state: present
+    - name: "Start nginx"
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+    - name: "Declare hostname"
+      shell: "echo $HOSTNAME"
+      register: print_hostname
+    - name: "ip address"
+      register: print_ip2 
+      debug:
+        msg: "This host name is {{ ansible_hostname }} , with ipv4 interfaces: eth0: {{ ansible_eth0.ipv4.address }}, eth1: {{ ansible_eth1['ipv4']     ['address'] }}"
+    - name: "Date"
+      register: print_date
+      debug:
+        msg: "The date is {{ ansible_date_time.date }}"
+    - name: "SO version"
+      register: print_distribution
+      debug:
+        msg: "The distribution is: {{ ansible_distribution }} version is: {{ ansible_distribution_major_version }}"
+    - name: "Memory"
+      register: print_memory_available
+      debug:
+        msg: "The total memory is: {{ ansible_memtotal_mb }}"  
+    - name: "Processors"
+      register: print_processors
+      debug:
+        msg: "The processors cores are: {{ ansible_processor_cores }}"   
+    - name: "Configure nginx"
+      template:
+        src: templates/index.j2
+        dest: /usr/share/nginx/html/index.html
+        owner: root
+        group: wheel
+        mode: "0644"
+        
+    
+
+    
+
+      
+   
+
+
+
+
