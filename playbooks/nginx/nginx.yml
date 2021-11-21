@@ -1,0 +1,44 @@
+---
+- hosts: servers
+  become: true
+  tasks:
+    - name: install epel repository
+      yum:
+        name: epel-release
+    - name: install nginx
+      yum:
+        name: nginx
+        state: present
+    - name: start nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+    - name: know hostname
+      shell: "echo $HOSTNAME"
+      register: print_hostname
+      
+    - name: ansible kernel
+      debug: msg='{{ ansible_kernel }}'
+      register: ansible_kernel
+    - name: ansible_machine
+      register: ansible_machine
+      debug: msg="{{ ansible_machine }}"
+    - name: ansible_nodename
+      register: ansible_nodename
+      debug: msg="{{ ansible_nodename }}"
+    - name: ansible_memtotal_mb
+      register: ansible_memtotal_mb
+      debug: msg="{{ ansible_memtotal_mb }}"
+    - name: ansible_uptime_seconds
+      register: ansible_uptime_seconds
+      debug: msg="{{ ansible_uptime_seconds }}"
+      
+    - name: configure nginx
+      template:
+        src: templates/index.j2
+        dest: /usr/share/nginx/html/index.html
+        owner: root
+        group: wheel
+        mode: '0644'
+
