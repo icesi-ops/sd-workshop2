@@ -1,9 +1,4 @@
-# Authors
-
-* Christian Gallo Peláez 
-
-* Sebastián García Acosta
-# Workshop4
+# Workshop 2
 
 Integrate microservice app-pay to:
 - Consul
