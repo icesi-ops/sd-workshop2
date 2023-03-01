@@ -1,0 +1,13 @@
+---
+- name: Mount disks
+  hosts: nodes
+  become: true
+  vars:
+    ansible_ssh_user: vagrant  # Replace "myuser" with your desired SSH user
+  tasks:
+    - name: Mount glusterfs        
+      mount:
+        path: /mnt
+        src: "localhost:/gv0"
+        fstype: glusterfs
+        state: mounted

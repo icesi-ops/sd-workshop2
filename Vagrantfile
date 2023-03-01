@@ -4,11 +4,13 @@
 Vagrant.configure("2") do |config|
 
   config.ssh.insert_key = false
+  
+  va = 0
 
   (1..3).each do |i|
    config.vm.define "node#{i}" do |lb|
      lb.vm.box = "centos/7"
-     
+     va = i
      disk_dir = "./disk#{i}.vdi"
      node_ip = "192.168.56.1#{i}"
      node_name = "node#{i}"
@@ -31,18 +33,16 @@ Vagrant.configure("2") do |config|
      lb.vm.provision "ansible" do |ansible|
       ansible.playbook = "playbook.yaml"
       ansible.inventory_path="ansible_hosts.ini"
-      ansible.extra_vars = {
-         "web_servers" => [
-          {"name": "node1","ip":"192.168.56.11"},
-          {"name": "node2","ip":"192.168.56.12"},
-          {"name": "master","ip":"192.168.56.200"}
-         ] 
-    	}
-    
-    end  
-
+     end  # end ansible
    end #end lb
+   va += 1
   end #end loop
+
+  config.trigger.after :up do |trigger|
+    trigger.name = "Mount localhost disk"
+    trigger.run = { path: "scripts/nodes_gluster.sh", args: va }
+   end #end trigger
+
 end #end config
 
 

@@ -65,15 +65,3 @@
           sudo gluster volume set gv0 auth.allow 127.0.0.1
           sudo gluster volume start gv0
           sudo mount.glusterfs master:/gv0 /mnt
-
-- name: Mount disks
-  hosts: nodes
-  become: true
-  tasks:
-    - name: Mount glusterfs        
-      mount:
-        path: /mnt
-        src: "localhost:/gv0"
-        fstype: glusterfs
-        state: mounted
-      when: inventory_hostname == "master"
