@@ -1,0 +1,22 @@
+---
+- hosts: nodes
+  become: true
+  tasks:
+    - name: Add node1 and node2
+      shell: sudo gluster peer probe node1
+      shell: sudo gluster peer probe node2
+    - name: Montar volumen GlusterFS
+      mount:
+        name: /mnt
+        fstype: glusterfs
+        opts: _netdev,defaults
+        src: "localhost:/gv0"
+        state: mounted
+- hosts: node1 
+  tasks: 
+    - name: Create file
+      shell: echo "Hola desde node1" > /mnt/saludo-node1.txt
+- hosts: node2 
+  tasks: 
+    - name: Create file
+      shell: echo "Hola desde node2" > /mnt/saludo-node2.txt

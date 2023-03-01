@@ -1,0 +1,14 @@
+---
+- hosts: master
+  become: true
+  tasks:
+    - name: Iniciar el servicio
+      systemd:
+        name: glusterd
+        state: started
+    - name: Add node1 and node2 to the master
+      shell: sudo gluster peer probe node1
+      shell: sudo gluster peer probe node2
+    - name: Create the volume and start it
+      shell: sudo gluster volume create gv0 replica 3 master:/data node1:/data node2:/data
+      shell: sudo gluster volume start gv0
