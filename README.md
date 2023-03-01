@@ -1,11 +1,10 @@
 # sd-workshop2 2022-1
 sd workshop2
 
-- Completar la lógica de la applicación de pagos de tal manera que al hacer un pago através del microservicio de pagos, el monto de las facturas sea correctamente debitado, es decir, actualmente si una factura debe 1000 y yo hago un pago por 400 a esa factura, el microservicio invoice me sobreescribe el 1000 por 400 en vez de mostrarme el saldo restante 1000-400=600.
-- Completar la lógica de la aplicación de tal manera que haya 3 estados para las facturas. 0=debe 1=pagadoparcialmente 2=pagado
-- Hacer que las applicaciones se puedan registrar con consul
-- Debe ser un pull request a este repositorio sd-workshop2
+Funcionamiento
 
-Bonus:
-- Subir las imagenes de la app a Docker hub
-- Crear un script en bash que lance toda la aplicación.
+- En el Vagranfile se ejecutan n maquinas, cada una con un disco adjunto, y de las cuales una de ellas (master (nodo1)) será dónde se cree el volumen compartido con las otras dos maquinas (node2 y node3).
+-  Despues de esto se verifica que cada una este creada mientras la ejecucion del vagrant se hace, si no, todavia no inicia los scripts.
+-  Una vez todo configurado se procede al inicio de los scripts y configuracion.
+
+Disfrutenlo!
