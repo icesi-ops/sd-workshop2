@@ -1,11 +1,14 @@
 # sd-workshop2 2022-1
 sd workshop2
 
-- Completar la lógica de la applicación de pagos de tal manera que al hacer un pago através del microservicio de pagos, el monto de las facturas sea correctamente debitado, es decir, actualmente si una factura debe 1000 y yo hago un pago por 400 a esa factura, el microservicio invoice me sobreescribe el 1000 por 400 en vez de mostrarme el saldo restante 1000-400=600.
-- Completar la lógica de la aplicación de tal manera que haya 3 estados para las facturas. 0=debe 1=pagadoparcialmente 2=pagado
-- Hacer que las applicaciones se puedan registrar con consul
-- Debe ser un pull request a este repositorio sd-workshop2
+- En el presente repositorio se encuentra la automatización de la creación de un file system con 3  nodos. Y la creación de un volumen con replica en los 3 nodos.
 
-Bonus:
-- Subir las imagenes de la app a Docker hub
-- Crear un script en bash que lance toda la aplicación.
+- Para la automatización de la creación de la infraestructura se utiliza un archivo Vagrantfile que levanta 3 VM Centos/7 con su respectivas direcciones IP.
+
+- El aprovisionamiento se divide en 2 partes. Primero se ejecutan scripts directamente enlazados al Vagrantfile para la instalación de los paquetes necesarios de gluster y la configuración de los hosts.
+
+- Luego, se utiliza la herramienta Ansible para automatizar la creación del volumen y la sincronización.
+
+- Guía de ejecución:
+	vagrant up
+	ansible-playbook main.yml
