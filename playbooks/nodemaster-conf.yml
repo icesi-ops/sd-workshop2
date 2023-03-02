@@ -1,0 +1,21 @@
+---
+- hosts: master
+  become: true
+  tasks:
+    - name: Start gluster
+      systemd:
+        name: glusterd
+        state: started
+
+    - name: Peer every node
+      gluster_peer:
+        state: present
+        nodes:
+          - node1
+          - node2
+
+    - name: Create the volume
+      shell: sudo gluster volume create gv0 replica 3 master:/data node1:/data node2:/data force
+
+    - name: Start volume
+      shell: sudo gluster volume start gv0
