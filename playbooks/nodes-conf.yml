@@ -1,0 +1,19 @@
+---
+- hosts: nodes
+  become: true
+  tasks:
+    - name: Mount GlusterFS
+      mount:
+        name: /mnt
+        fstype: glusterfs
+        opts: _netdev,defaults
+        src: "localhost:/gv0"
+        state: mounted
+- hosts: node1
+  tasks:
+    - name: Create file
+      shell: echo "Hello world!" | sudo tee /mnt/helloworld-node1.txt
+- hosts: node2
+  tasks:
+    - name: Create file
+      shell: echo "Hello world!" | sudo tee /mnt/helloworld-node2.txt
