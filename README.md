@@ -4,10 +4,10 @@ Para ejecutar el escenario del filesystem mediante un gluster (1 nodo master y 2
 Si aparece un error similar a:
 "The IP address configured for the host-only network is not within the allowed ranges. 
 Please update the address used to be within the allowed ranges and run the command again."
-Crea un nuevo archivo en /etc/vbox/networks.conf con el siguiente contenido:\n
-\* 10.0.0.0/8 192.168.0.0/16\n
-\* 2001::/64
-
+Crea un nuevo archivo en /etc/vbox/networks.conf con el siguiente contenido:
+"* 10.0.0.0/8 192.168.0.0/16"
+"* 2001::/64"
+(!Quitamos las "")
 # Distributed File System (With Glusterfs)
 
 ![alt text](https://docs.gluster.org/en/v3/images/640px-GlusterFS_Architecture.png "gluster")  
