@@ -1,4 +1,12 @@
-Para ejecutar el escenario del filesystem mediante un gluster (1 nodo master y 2 nodos), ejecutar el script ./init_distributed_filesystem
+Para ejecutar el escenario del filesystem mediante un gluster (1 nodo master y 2 nodos):
+- Damos permisos de ejecución al script init_distributed_filesystem: chmod +x init_distributed_filesystem.sh 
+- Ejecutamos el script ./init_distributed_filesystem
+Si aparece un error similar a:
+"The IP address configured for the host-only network is not within the allowed ranges. 
+Please update the address used to be within the allowed ranges and run the command again."
+Crea un nuevo archivo en /etc/vbox/networks.conf con el siguiente contenido:
+\* 10.0.0.0/8 192.168.0.0/16
+\* 2001::/64
 
 # Distributed File System (With Glusterfs)
 

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-vagrant up
-ansible-playbooks playbooks/nodemaster-conf.yml
-ansible-playbooks playbooks/nodes-conf.yml
+#vagrant up
+ansible-playbook playbooks/nodemaster-conf.yml
+ansible-playbook playbooks/nodes-conf.yml
