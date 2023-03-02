@@ -1,0 +1,29 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Add nodes to gluster cluster
+      gluster_peer:
+        state: present
+        nodes:
+          - node2
+          - node3
+
+    - name: Create volumen
+      gluster_volume:
+        state: present
+        name: gv0
+        bricks: /gluster/data/gv0
+        replicas: 3
+        cluster:
+        - node1
+        - node2
+        - node3
+
+    - name: Start volumen gluster
+      gluster_volume:
+        state: started
+        name: gv0
+
+    - name: Mount volumen gluster to mnt
+      shell: mount.glusterfs localhost:/gv0 /mnt
