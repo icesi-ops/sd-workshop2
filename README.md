@@ -18,11 +18,13 @@ Para probar si esta funcionando el gluster, simplemente se accede a la carpeta d
 ##¿Cómo probar?
 Para probar la configuracion realizada en Ansible, simplemente se realiza:
 
+````
 $ vagrant up
-$ ansible-playbook ./playbooks/01-master-conf.yml
+$ iansible-playbook ./playbooks/01-master-conf.yml
 $ ansible-playbook ./playbooks/02-node-conf.yml
 $ vagrant ssh node1
 $ cd /data/ | ls 
+````
 
 Con esto podemos ver que se crearon ambos archivos y estos se replicaron en el directorio de /data
 
