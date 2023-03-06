@@ -1,0 +1,67 @@
+---
+- name: Provision glusterfs nodes
+  hosts: all
+  become: true
+  tasks:
+    - name: Install glusterfs
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - centos-release-gluster
+        - glusterfs-server
+        - xfsprogs
+
+    - name: Start glusterd service
+      service:
+        name: glusterd
+        state: started
+
+    - name: Create partition
+      parted:
+        device: /dev/sdb
+        number: 1
+        state: present
+
+    - name: Format partition
+      filesystem:
+        fstype: xfs
+        dev: /dev/sdb1
+
+    - name: Create directory
+      file:
+        path: /gluster/data
+        state: directory
+
+    - name: Mount glusterfs partition
+      mount:
+        path: /gluster/data
+        src: /dev/sdb1
+        fstype: xfs
+        state: mounted
+
+    - name: Add hosts entries
+      lineinfile:
+        dest: /etc/hosts
+        line: "{{ item }}"
+      with_items:
+        - "192.168.56.200 master"
+        - "192.168.56.11	node1"
+        - "192.168.56.12	node2"
+
+- name: Setup Master
+  hosts: master
+  become: true
+  tasks:
+      - name: Run master script
+        become: true
+        shell: |
+          echo $HOSTNAME
+          echo "RUNNING MASTER SCRIPT"
+          sudo gluster peer probe node1
+          sudo gluster peer probe node2
+          sudo gluster pool list
+          sudo gluster volume create gv0 replica 3 master:/gluster/data/gv0/ node1:/gluster/data/gv0 node2:/gluster/data/gv0
+          sudo gluster volume set gv0 auth.allow 127.0.0.1
+          sudo gluster volume start gv0
+          sudo mount.glusterfs master:/gv0 /mnt
