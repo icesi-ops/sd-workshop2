@@ -1,0 +1,19 @@
+---
+- hosts: nodes
+  become: true
+  tasks:
+    - name: Montar volumen GlusterFS
+      mount:
+        name: /mnt
+        fstype: glusterfs
+        opts: _netdev,defaults
+        src: "localhost:/gv0"
+        state: mounted
+- hosts: node1 
+  tasks: 
+    - name: Create file
+      shell: echo "Hola desde node1" | sudo tee /mnt/saludo-node1.txt
+- hosts: node2 
+  tasks: 
+    - name: Create file
+      shell: echo "Hola desde node2" | sudo tee /mnt/saludo-node2.txt
